@@ -104,4 +104,6 @@ venv.bak/
 .mypy_cache/
 
 #Sean additions
-*/*.txt
+*.txt
+*/output.txt
+*/output.txt.dat
