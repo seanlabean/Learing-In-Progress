@@ -108,3 +108,4 @@ venv.bak/
 */output.txt
 */output.txt.dat
 *.png
+test_*
