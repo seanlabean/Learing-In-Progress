@@ -109,3 +109,4 @@ venv.bak/
 */output.txt.dat
 *.png
 test_*
+./PhysicsToday/*.pdf
