@@ -110,3 +110,4 @@ venv.bak/
 *.png
 test_*
 PhysicsToday/*.pdf
+StarFormation/JoshNotebooks/*
