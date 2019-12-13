@@ -18,7 +18,7 @@ unset words
 unset output
 unset restart
 
-FILE=./flash.par
+FILE=flash.par
 line=''
 
 # Check if input FILE exists. https://linuxize.com/post/bash-check-if-file-exists/
@@ -35,9 +35,13 @@ fi
 # Read in lines from FILE, divide each line into array of words.
 # https://stackoverflow.com/questions/10929453
 while read -a words; do
-    if [[ ${words[0]} == "output_dir" ]]; then
-	echo "output directory is ${words[2]}"
-	output=${words[2]}
+    if [[ ${words[0]} == "output_directory=" ]]; then
+	# Remove quotations around output directory name.
+	# https://stackoverflow.com/questions/9733338
+	temp=${words[1]}
+	temp="${temp%\"}"
+	output="${temp#\"}"
+	echo "output directory is ${words[1]}"
 	echo "Checking status of $output"
     fi
 done < "$FILE"
@@ -60,6 +64,7 @@ if [ -n "$(find "$output" -maxdepth 0 -type d -empty 2>/dev/null)" ]; then
 else
     echo "$output is NOT empty."
     echo "Therefore, RESTART is assumed. Performing .par diff check."
+    echo "Expect AT LEAST: checkpointFileNumber & plotFileNumber diffs."
     diff $FILE $output/$FILE
     while true; do
 	read -p "Check these differences, is everything expected? (y/n): " yn
