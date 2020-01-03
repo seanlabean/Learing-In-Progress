@@ -55,31 +55,39 @@ def plot_projection(input_dir, ax, field_data, max_field_value, min_field_value,
     proj_.annotate_timestamp()
     proj_.annotate_title('$10^5$ M$_{\odot}$ Projection ' + field_data)
     proj_.annotate_scale()
-    proj_.save('/data/draco/slewis' + input_dir + '/figures/' + file_name[-4:])
+    #proj_.save('/data/draco/slewis' + input_dir + '/figures/' + file_name[-4:])
+    proj_.save('./figures/' + file_name[-4:])
     print 'Plot ' + str(file_name[-4:]) + ' saved.'
     
 def plot_slice(input_dir, ax, field_data, max_field_value, min_field_value, zoom_val, file_name):
-    print 'Processor ' + str(os.getpid()) + '\n is plotting slice file ' + str(file_name[-4:])
-    ds = yt.load(file_name)
-    slice_ = yt.SlicePlot(ds, ax, field_data)
-    if zoom_val != -1:
-        print 'Setting Zoom value.'
-        slice_.zoom(zoom_val)
-    else:
-        print 'No zoom value given. Skipping.'
-        None
-    if max_field_value != -1:
-        print 'Setting max/min field value'
-        slice_.set_zlim(field_data, min_field_value, max_field_value)
-    else:
-        print 'No max/min field value given. Skipping.'
-        None
-    slice_.set_font_size(24)
-    slice_.annotate_timestamp()
-    slice_.annotate_title('$10^5$ M$_{\odot}$ Projection ' + field_data)
-    slice_.annotate_scale()
-    slice_.save('/data/draco/slewis' + input_dir + '/figures/' + file_name[-4:])
-    print 'Plot ' + str(file_name[-4:]) + ' saved.'
+    # print 'Processor ' + str(os.getpid()) + '\n is plotting slice file ' + str(file_name[-4:])
+    # ds = yt.load(file_name)
+    # print 'Loaded file, making plot now.'
+    # slice_ = yt.SlicePlot(ds, ax, field_data)
+    # if zoom_val != -1:
+    #     print 'Setting Zoom value.'
+    #     slice_.zoom(zoom_val)
+    # else:
+    #     print 'No zoom value given. Skipping.'
+    #     None
+    # if max_field_value != -1:
+    #     print 'I am setting max/min field value'
+    #     slice_.set_zlim(field_data, min_field_value, max_field_value)
+    # else:
+    #     print 'No max/min field value given. Skipping.'
+    #     None
+    # print 'Setting font size'
+    # #slice_.set_font_size(24)
+    # print 'Annotating Timestamp'
+    # slice_.annotate_timestamp()
+    # print 'Adding Title'
+    # slice_.annotate_title('$10^5$ M$_{\odot}$ Projection ' + field_data)
+    # print 'Adding scale'
+    # slice_.annotate_scale()
+    # print 'About to save.'
+    # slice_.save('/data/draco/slewis' + input_dir + '/figures/' + file_name[-4:])
+    # print 'Plot ' + str(file_name[-4:]) + ' saved.'
+    print 'Inside plot_slice. On file # ', file_name
 
 start = time.time()
 
@@ -94,7 +102,8 @@ min_field = args.min_field_value
 zoom = args.zoom_value
 
 pool = multiprocessing.Pool()
-data_files = glob.glob('/data/draco/slewis' + data_in + '/turbsph_hdf5_plt_cnt_*')
+#data_files = glob.glob('/data/draco/slewis' + data_in + '/turbsph_hdf5_plt_cnt_*')
+data_files = glob.glob('./data/turbsph_hdf5_plt_cnt_*')
 
 func_slice = partial(plot_slice, data_in, ax, field, max_field, min_field, zoom) 
 func_proj = partial(plot_projection, data_in, ax, field, max_field, min_field, zoom)
@@ -109,6 +118,7 @@ print 'axis: ', ax
 #    plot_slice(data_in, ax, field, max_field, min_field, zoom, data)
 
 if plt_type in ("Slice", "slice", "slc"):
+    print plt_type, type(plt_type)
     print 'I am in slice pool.map'
     pool.map(func_slice, data_files)
 elif plt_type in ("Projection", "Proj", "projection", "proj"):
