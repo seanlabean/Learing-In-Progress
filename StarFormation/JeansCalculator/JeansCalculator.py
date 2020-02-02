@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(description= "Calculates optimum Jean's Length 
                                  Values to be set are simulation box size and \
                                  maximum refinement level."
                                  )
-#parser.print_help()
+parser.print_help()
 parser.add_argument("-b", "--box_size", default=None, required=True, type=float,
                     help="Side length of simulation space in parsecs.")
 parser.add_argument("-r", "--refinement_max", default=None, required=True, type=float,
