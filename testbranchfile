@@ -2,4 +2,6 @@ making changes on test branch.
 
 more changes
 
-and final line on 'test'
+and [conflicting change!] final line on 'test'
+
+change made on subbranch
