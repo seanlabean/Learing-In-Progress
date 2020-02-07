@@ -1,9 +1,0 @@
-# filename: output.txt                         
-
-#     Msph       Rsph  x/y/z max       Ekin       Epot       Emag       Qvir         B0         n0
-#   (Msun)       (pc)       (pc)      (erg)      (erg)      (erg)        (-)    (Gauss)    (cm^-3)
-  1.00E+05   5.00E+01   5.50E+01   4.40E+48  -1.10E+49   0.00E+00   4.00E-01   0.00E+00   1.25E+00
-
-#       B0         n0       Tsph       Tamb      musph      muamb       kmin       kmax   turb_exp
-#  (Gauss)    (cm^-3)        (K)        (K)       (mH)       (mH)        (-)        (-)        (-)
-  0.00E+00   1.25E+00   3.00E+01   8.00E+03   1.30E+00   1.30E+00   1.00E+00   3.20E+01  -1.67E+00
